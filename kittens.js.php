@@ -1,11 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "usernameHere";
-$password = "passwordHere";
-$database = "dbHere";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=" . $database . ";charset=utf8", $username, $password);
+    $dbinfo = parse_ini_file("db.ini");
+    $conn = new PDO("mysql:host=". $dbinfo["servername"] . ";dbname=" . $dbinfo["database"] . ";charset=utf8", $dbinfo["username"], $dbinfo["password"]);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare("SELECT url, title, imageUrl, imageAlt from links");
